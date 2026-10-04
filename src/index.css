@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #05070D;
+  color: #F7F7FF;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Glassmorphism */
+.glass-panel {
+  background: rgba(13, 16, 28, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(124, 60, 255, 0.2);
+}
+
+.glass-card {
+  background: #0D101C;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(124, 60, 255, 0.15);
+}
+
+.glass-card:hover {
+  background: rgba(13, 16, 28, 0.95);
+  border-color: rgba(155, 92, 255, 0.4);
+  box-shadow: 0 0 25px rgba(124, 60, 255, 0.25);
+}
+
+/* Cinematic Entrance Keyframes */
+@keyframes letterFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(28px) scale(0.92);
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+@keyframes cinematicFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0px);
+  }
+}
+
+.animate-letter {
+  opacity: 0;
+  display: inline-block;
+  animation: letterFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-cinematic-delay-1 {
+  opacity: 0;
+  animation: cinematicFadeIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;
+}
+
+.animate-cinematic-delay-2 {
+  opacity: 0;
+  animation: cinematicFadeIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) 1.5s forwards;
+}
+
+.animate-cinematic-delay-3 {
+  opacity: 0;
+  animation: cinematicFadeIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) 1.9s forwards;
+}
+
+/* Continuous Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-33.333333%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+  will-change: transform;
+}
+
