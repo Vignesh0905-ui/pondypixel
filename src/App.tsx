@@ -1,5 +1,4 @@
-import React from 'react';
-import { Futuristic3DCanvas } from './components/3d/Futuristic3DCanvas';
+import React, { lazy, Suspense } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
@@ -13,20 +12,28 @@ import { Preloader } from './components/Preloader';
 import { CustomCursor } from './components/CustomCursor';
 import { useScrollAnimations } from './hooks/useScrollAnimations';
 
+// Deferred: the WebGL background chunk loads after first paint so the hero
+// becomes usable immediately (non-critical 3D effect).
+const Futuristic3DCanvas = lazy(() =>
+  import('./components/3d/Futuristic3DCanvas').then((m) => ({ default: m.Futuristic3DCanvas }))
+);
+
 export const App: React.FC = () => {
-  // Initialize GSAP ScrollTrigger 3D reveals
+  // Initialize lightweight viewport reveal animations
   useScrollAnimations();
 
   return (
-    <div className="relative min-h-screen text-[#F7F7FF] selection:bg-[#7C3CFF]/30 selection:text-[#35A7FF] bg-[#05070D] font-jakarta">
+    <div className="relative min-h-screen text-[#F7F7FF] selection:bg-[#7C3CFF]/30 selection:text-white bg-[#05070D] font-jakarta bg-bright-pattern">
+      {/* Cinematic 3D Hero Background (Iridescent Torus + Flowing Ribbons + Glass Orbs + Reflective Floor) */}
+      <Suspense fallback={null}>
+        <Futuristic3DCanvas />
+      </Suspense>
+
       {/* 1. Intro Preloader Screen */}
       <Preloader />
 
-      {/* 2. Custom Glowing Desktop Cursor */}
+      {/* 2. Minimal Adaptive Desktop Cursor */}
       <CustomCursor />
-
-      {/* 3. Premium Dark Futuristic 3D Canvas Scene */}
-      <Futuristic3DCanvas />
 
       {/* Main Portfolio Content Layer */}
       <div className="relative z-10">
@@ -63,3 +70,4 @@ export const App: React.FC = () => {
 };
 
 export default App;
+

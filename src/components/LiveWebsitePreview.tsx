@@ -42,7 +42,7 @@ export const LiveWebsitePreview: React.FC<LiveWebsitePreviewProps> = ({
 
       {/* Actual Live Website Iframe */}
       {canUseIframe ? (
-        <div className="relative w-full h-full overflow-hidden">
+        <div className="card-depth-img relative w-full h-full overflow-hidden">
           <iframe
             src={targetUrl}
             title={`${project.title} Live Preview`}
@@ -66,7 +66,7 @@ export const LiveWebsitePreview: React.FC<LiveWebsitePreviewProps> = ({
           <img
             src={project.image}
             alt={`${project.title} Live Homepage`}
-            className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+            className="card-depth-img w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
             onLoad={() => setIsLoading(false)}
           />
         </div>

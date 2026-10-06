@@ -16,7 +16,7 @@ export const BackgroundVideo: React.FC = () => {
       });
     }
 
-    // Check if touch device / mobile - disable parallax on mobile
+    // Check if touch device / mobile - disable parallax on mobile for smooth performance
     const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
     if (isTouchDevice) return;
 
@@ -25,10 +25,11 @@ export const BackgroundVideo: React.FC = () => {
     let targetY = 0;
     let currentX = 0;
     let currentY = 0;
-    let animationFrameId: number;
+    let animationFrameId: number | null = null;
+    let isTicking = false;
 
-    const MAX_X = 22; // max ~22px shift horizontally
-    const MAX_Y = 14; // max ~14px shift vertically
+    const MAX_X = 18; // max ~18px shift horizontally
+    const MAX_Y = 12; // max ~12px shift vertically
 
     const handleMouseMove = (e: MouseEvent) => {
       const centerX = window.innerWidth / 2;
@@ -39,26 +40,35 @@ export const BackgroundVideo: React.FC = () => {
 
       targetX = normX * MAX_X;
       targetY = normY * MAX_Y;
+
+      if (!isTicking) {
+        isTicking = true;
+        animationFrameId = requestAnimationFrame(updateParallax);
+      }
     };
 
     const updateParallax = () => {
-      // Lerp interpolation for buttery smooth floating motion
-      currentX += (targetX - currentX) * 0.05;
-      currentY += (targetY - currentY) * 0.05;
+      // Lerp interpolation for smooth floating motion
+      currentX += (targetX - currentX) * 0.08;
+      currentY += (targetY - currentY) * 0.08;
 
       if (video) {
         video.style.transform = `translate3d(${currentX.toFixed(2)}px, ${currentY.toFixed(2)}px, 0px) scale(1.04)`;
       }
 
-      animationFrameId = requestAnimationFrame(updateParallax);
+      // Continue animation only while moving towards target to conserve GPU cycles
+      if (Math.abs(targetX - currentX) > 0.01 || Math.abs(targetY - currentY) > 0.01) {
+        animationFrameId = requestAnimationFrame(updateParallax);
+      } else {
+        isTicking = false;
+      }
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    animationFrameId = requestAnimationFrame(updateParallax);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      cancelAnimationFrame(animationFrameId);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
@@ -72,7 +82,7 @@ export const BackgroundVideo: React.FC = () => {
         loop
         playsInline
         preload="auto"
-        className="w-full h-full object-cover scale-[1.04] will-change-transform"
+        className="w-full h-full object-cover scale-[1.04] will-change-transform opacity-90"
         style={{
           transform: 'translate3d(0px, 0px, 0px) scale(1.04)',
         }}
@@ -83,11 +93,11 @@ export const BackgroundVideo: React.FC = () => {
         />
       </video>
 
-      {/* Subtle Dark Navy Transparent Overlay - Brighter & More Visible */}
-      <div className="absolute inset-0 bg-[#05070D]/25 backdrop-brightness-[0.95]" />
+      {/* Slightly Lifted Dark Navy Transparent Overlay - 75% Dark Mood for High Visibility */}
+      <div className="absolute inset-0 bg-[#05070D]/40" />
 
       {/* Soft Atmospheric Subtle Vignette */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#05070D]/40 via-transparent to-[#080A12]/60" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#05070D]/50 via-transparent to-[#05070D]/70" />
     </div>
   );
 };

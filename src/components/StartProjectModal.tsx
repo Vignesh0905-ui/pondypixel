@@ -72,29 +72,29 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-      {/* Dark Overlay Backdrop */}
+      {/* Light Overlay Backdrop */}
       <div
-        className="fixed inset-0 bg-[#05070D]/85 backdrop-blur-xl transition-opacity duration-300"
+        className="fixed inset-0 bg-slate-900/40 backdrop-blur-md transition-opacity duration-300"
         onClick={onClose}
       />
 
       {/* Modal Card */}
-      <div className="relative z-10 w-full max-w-2xl glass-panel rounded-3xl overflow-hidden border border-[#7C3CFF]/30 shadow-2xl my-auto animate-scaleUp bg-[#0D101C]">
+      <div className="relative z-10 w-full max-w-2xl rounded-3xl overflow-hidden border border-slate-200 shadow-2xl my-auto animate-scaleUp bg-white">
         
         {/* Modal Top Bar */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#7C3CFF]/20 bg-[#080A12]">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 bg-slate-50">
           <div className="flex items-center gap-2">
             <span className="w-3 h-3 rounded-full bg-[#7C3CFF]/40" />
             <span className="w-3 h-3 rounded-full bg-[#9B5CFF]/60" />
             <span className="w-3 h-3 rounded-full bg-[#35A7FF]/80" />
-            <span className="text-xs font-mono text-[#35A7FF] font-semibold ml-2 flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-[#35A7FF]" /> Start a New Project
+            <span className="text-xs font-mono text-[#7C3CFF] font-semibold ml-2 flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-[#7C3CFF]" /> Start a New Project
             </span>
           </div>
 
           <button
             onClick={onClose}
-            className="w-9 h-9 rounded-xl bg-[#080A12] hover:bg-[#0D101C] text-[#9CA3B8] hover:text-white flex items-center justify-center transition-colors border border-[#7C3CFF]/20"
+            className="w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-900 flex items-center justify-center transition-colors border border-slate-200"
           >
             <X className="w-5 h-5" />
           </button>
@@ -104,55 +104,55 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
         <div className="p-6 sm:p-8 space-y-6">
           {submitted ? (
             <div className="py-12 text-center flex flex-col items-center justify-center space-y-4">
-              <div className="w-16 h-16 rounded-full bg-[#7C3CFF]/10 border border-[#7C3CFF]/30 flex items-center justify-center text-[#35A7FF]">
+              <div className="w-16 h-16 rounded-full bg-purple-50 border border-purple-200 flex items-center justify-center text-[#7C3CFF]">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
-              <h3 className="text-xl font-bold text-[#F7F7FF] font-outfit">Project Brief Ready!</h3>
-              <p className="text-sm text-[#9CA3B8] max-w-sm">
+              <h3 className="text-xl font-bold text-[#0F172A] font-outfit">Project Brief Ready!</h3>
+              <p className="text-sm text-slate-600 max-w-sm">
                 Redirecting to WhatsApp to chat directly with Vigneshwara...
               </p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="text-center mb-4">
-                <h3 className="text-2xl font-bold text-[#F7F7FF] font-outfit">Tell Us About Your Project</h3>
-                <p className="text-xs text-[#9CA3B8] mt-1">Fill out the brief to connect directly via WhatsApp or Email.</p>
+                <h3 className="text-2xl font-bold text-[#0F172A] font-outfit">Tell Us About Your Project</h3>
+                <p className="text-xs text-slate-500 mt-1">Fill out the brief to connect directly via WhatsApp or Email.</p>
               </div>
 
               {/* Name & Email Row */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-[#9CA3B8] mb-1.5">Your Name</label>
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Your Name</label>
                   <input
                     type="text"
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="John Doe"
-                    className="w-full bg-[#05070D] border border-[#7C3CFF]/20 focus:border-[#9B5CFF] text-[#F7F7FF] placeholder-[#64748B] text-xs sm:text-sm rounded-xl px-4 py-3 outline-none transition-all"
+                    className="w-full bg-slate-50 border border-slate-200 focus:border-[#7C3CFF] focus:bg-white text-[#0F172A] placeholder-slate-400 text-xs sm:text-sm rounded-xl px-4 py-3 outline-none transition-all"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-[#9CA3B8] mb-1.5">Email Address</label>
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Email Address</label>
                   <input
                     type="email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="john@example.com"
-                    className="w-full bg-[#05070D] border border-[#7C3CFF]/20 focus:border-[#9B5CFF] text-[#F7F7FF] placeholder-[#64748B] text-xs sm:text-sm rounded-xl px-4 py-3 outline-none transition-all"
+                    className="w-full bg-slate-50 border border-slate-200 focus:border-[#7C3CFF] focus:bg-white text-[#0F172A] placeholder-slate-400 text-xs sm:text-sm rounded-xl px-4 py-3 outline-none transition-all"
                   />
                 </div>
               </div>
 
               {/* Service Selector & Dynamic Custom Service Input */}
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[#9CA3B8] mb-1.5">Service Needed</label>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Service Needed</label>
                 <select
                   value={serviceType}
                   onChange={(e) => setServiceType(e.target.value)}
-                  className="w-full bg-[#05070D] border border-[#7C3CFF]/30 focus:border-[#9B5CFF] text-[#F7F7FF] text-xs sm:text-sm rounded-xl px-4 py-3 outline-none transition-all cursor-pointer"
+                  className="w-full bg-slate-50 border border-slate-200 focus:border-[#7C3CFF] focus:bg-white text-[#0F172A] text-xs sm:text-sm rounded-xl px-4 py-3 outline-none transition-all cursor-pointer"
                 >
                   <option value="Web Development">Web Development</option>
                   <option value="Frontend Development">Frontend Development</option>
@@ -166,7 +166,7 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
                 {/* Custom Service Input smooth reveal */}
                 {serviceType === 'Custom' && (
                   <div className="mt-3 animate-fadeIn">
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-[#35A7FF] mb-1 flex items-center gap-1.5">
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-[#7C3CFF] mb-1 flex items-center gap-1.5">
                       <Edit3 className="w-3.5 h-3.5" /> Custom Service
                     </label>
                     <input
@@ -175,7 +175,7 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
                       value={customService}
                       onChange={(e) => setCustomService(e.target.value)}
                       placeholder="Tell us what you need..."
-                      className="w-full bg-[#080A12] border border-[#35A7FF]/50 focus:border-[#9B5CFF] text-[#F7F7FF] placeholder-[#64748B] text-xs sm:text-sm rounded-xl px-4 py-3 outline-none transition-all"
+                      className="w-full bg-slate-50 border border-slate-200 focus:border-[#7C3CFF] focus:bg-white text-[#0F172A] placeholder-slate-400 text-xs sm:text-sm rounded-xl px-4 py-3 outline-none transition-all"
                     />
                   </div>
                 )}
@@ -183,8 +183,8 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
 
               {/* Estimated Budget Chips & Dynamic Custom Budget Input */}
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[#9CA3B8] mb-2 flex items-center gap-1.5">
-                  <IndianRupee className="w-3.5 h-3.5 text-[#35A7FF]" /> Estimated Budget
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-1.5">
+                  <IndianRupee className="w-3.5 h-3.5 text-[#7C3CFF]" /> Estimated Budget
                 </label>
 
                 <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
@@ -197,8 +197,8 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
                         onClick={() => setBudgetOption(item.value)}
                         className={`py-2.5 px-3 rounded-xl text-xs font-bold text-center transition-all duration-200 cursor-pointer ${
                           isSelected
-                            ? 'bg-gradient-to-r from-[#7C3CFF] to-[#35A7FF] text-[#F7F7FF] shadow-lg shadow-[#7C3CFF]/30 scale-105 border border-transparent'
-                            : 'bg-[#05070D] border border-[#7C3CFF]/20 text-[#9CA3B8] hover:text-[#F7F7FF] hover:border-[#9B5CFF]/40'
+                            ? 'bg-gradient-to-r from-[#7C3CFF] to-[#35A7FF] text-white shadow-md shadow-purple-500/20 scale-105 border border-transparent'
+                            : 'bg-slate-50 border border-slate-200 text-slate-600 hover:text-[#0F172A] hover:border-slate-300'
                         }`}
                       >
                         {item.label}
@@ -210,11 +210,11 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
                 {/* Custom Budget Input smooth reveal */}
                 {budgetOption === 'Custom' && (
                   <div className="mt-3 animate-fadeIn">
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-[#35A7FF] mb-1 flex items-center gap-1">
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-[#7C3CFF] mb-1 flex items-center gap-1">
                       <IndianRupee className="w-3.5 h-3.5" /> Custom Budget
                     </label>
                     <div className="relative flex items-center">
-                      <span className="absolute left-4 text-[#9B5CFF] font-bold text-sm">₹</span>
+                      <span className="absolute left-4 text-[#7C3CFF] font-bold text-sm">₹</span>
                       <input
                         type="text"
                         required
@@ -224,7 +224,7 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
                           setCustomBudget(val);
                         }}
                         placeholder="Enter your budget"
-                        className="w-full bg-[#080A12] border border-[#35A7FF]/50 focus:border-[#9B5CFF] text-[#F7F7FF] placeholder-[#64748B] text-xs sm:text-sm rounded-xl pl-9 pr-4 py-3 outline-none transition-all font-mono"
+                        className="w-full bg-slate-50 border border-slate-200 focus:border-[#7C3CFF] focus:bg-white text-[#0F172A] placeholder-slate-400 text-xs sm:text-sm rounded-xl pl-9 pr-4 py-3 outline-none transition-all font-mono"
                       />
                     </div>
                   </div>
@@ -233,23 +233,23 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
 
               {/* Project Details */}
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[#9CA3B8] mb-1.5">Project Overview</label>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Project Overview</label>
                 <textarea
                   rows={3}
                   required
                   value={details}
                   onChange={(e) => setDetails(e.target.value)}
                   placeholder="Describe your website goals, features, or deadlines..."
-                  className="w-full bg-[#05070D] border border-[#7C3CFF]/20 focus:border-[#9B5CFF] text-[#F7F7FF] placeholder-[#64748B] text-xs sm:text-sm rounded-xl px-4 py-3 outline-none transition-all resize-none"
+                  className="w-full bg-slate-50 border border-slate-200 focus:border-[#7C3CFF] focus:bg-white text-[#0F172A] placeholder-slate-400 text-xs sm:text-sm rounded-xl px-4 py-3 outline-none transition-all resize-none"
                 />
               </div>
 
               {/* Submit CTA */}
               <button
                 type="submit"
-                className="w-full py-4 rounded-xl bg-gradient-to-r from-[#7C3CFF] to-[#35A7FF] text-[#F7F7FF] font-bold text-xs sm:text-sm uppercase tracking-wider shadow-lg shadow-[#7C3CFF]/30 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 transition-all cursor-pointer"
+                className="btn-shimmer w-full py-4 rounded-xl bg-gradient-to-r from-[#7C3CFF] to-[#35A7FF] text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md shadow-purple-500/20 hover:scale-[1.01] active:scale-[0.98] flex items-center justify-center gap-2 transition-all cursor-pointer"
               >
-                <MessageSquare className="w-4 h-4 fill-[#F7F7FF]" />
+                <MessageSquare className="w-4 h-4 fill-white" />
                 <span>Send Brief via WhatsApp</span>
               </button>
             </form>
@@ -260,3 +260,4 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
     </div>
   );
 };
+

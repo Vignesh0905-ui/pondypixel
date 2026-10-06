@@ -6,82 +6,127 @@
   color-scheme: dark;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
 body {
   margin: 0;
   padding: 0;
   background-color: #05070D;
   color: #F7F7FF;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-/* Custom Glassmorphism */
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #05070D;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(124, 60, 255, 0.3);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(124, 60, 255, 0.6);
+}
+
+/* Atmospheric Overlay Pattern */
+.bg-bright-pattern {
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(124, 60, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 60%, rgba(53, 167, 255, 0.06) 0%, transparent 40%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+}
+
+/* Atmospheric Glassmorphism & Surface Cards */
 .glass-panel {
   background: rgba(13, 16, 28, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(124, 60, 255, 0.2);
+  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.5);
 }
 
 .glass-card {
-  background: #0D101C;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(124, 60, 255, 0.15);
+  background: rgba(13, 16, 28, 0.9);
+  border: 1px solid rgba(124, 60, 255, 0.2);
+  box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.4);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .glass-card:hover {
-  background: rgba(13, 16, 28, 0.95);
-  border-color: rgba(155, 92, 255, 0.4);
-  box-shadow: 0 0 25px rgba(124, 60, 255, 0.25);
+  border-color: rgba(124, 60, 255, 0.5);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -10px rgba(124, 60, 255, 0.25);
 }
 
-/* Cinematic Entrance Keyframes */
+/* Mobile Overrides for Maximum 60-120 FPS Performance */
+@media (max-width: 768px) {
+  .glass-panel, .glass-card {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(13, 16, 28, 0.95);
+  }
+
+  button, a {
+    touch-action: manipulation;
+  }
+}
+
+/* Entrance Animations */
 @keyframes letterFadeUp {
   0% {
     opacity: 0;
-    transform: translateY(28px) scale(0.92);
-    filter: blur(10px);
+    transform: translateY(16px);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0px);
+    transform: translateY(0);
   }
 }
 
 @keyframes cinematicFadeIn {
   0% {
     opacity: 0;
-    transform: translateY(18px);
-    filter: blur(4px);
+    transform: translateY(12px);
   }
   100% {
     opacity: 1;
     transform: translateY(0);
-    filter: blur(0px);
   }
 }
 
 .animate-letter {
   opacity: 0;
   display: inline-block;
-  animation: letterFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: letterFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-cinematic-delay-1 {
   opacity: 0;
-  animation: cinematicFadeIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;
+  animation: cinematicFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.08s forwards;
 }
 
 .animate-cinematic-delay-2 {
   opacity: 0;
-  animation: cinematicFadeIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) 1.5s forwards;
+  animation: cinematicFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.14s forwards;
 }
 
 .animate-cinematic-delay-3 {
   opacity: 0;
-  animation: cinematicFadeIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) 1.9s forwards;
+  animation: cinematicFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.20s forwards;
 }
 
 /* Continuous Marquee Animation */
@@ -95,7 +140,88 @@ body {
 }
 
 .animate-marquee {
-  animation: marquee 25s linear infinite;
+  animation: marquee 22s linear infinite;
   will-change: transform;
 }
+
+/* Modal Animations */
+@keyframes scaleUp {
+  0% {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-scaleUp {
+  animation: scaleUp 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Primary CTA Light Sweep (used by .btn-shimmer buttons) */
+@keyframes shimmerSweep {
+  0% {
+    transform: translateX(-120%);
+  }
+  55%,
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.25) 50%,
+    transparent 65%
+  );
+  transform: translateX(-120%);
+  animation: shimmerSweep 2.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+/* Inner image depth parallax inside Card3D cards.
+   Driven by --mx/--my CSS vars written by Card3D on pointer move.
+   Uses the CSS `translate` property so it never conflicts with Tailwind
+   transform utilities (hover scale) or GSAP transforms. */
+.card-depth-img {
+  translate: calc(var(--mx, 0) * -8px) calc(var(--my, 0) * -8px);
+  transition-property: transform, translate, scale, rotate;
+  transition-duration: 700ms, 150ms, 700ms, 700ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1),
+    cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.4, 0, 0.2, 1),
+    cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Performance & accessibility gates for the motion layer */
+@media (max-width: 768px) {
+  .btn-shimmer::after {
+    animation: none;
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-shimmer::after {
+    animation: none;
+    display: none;
+  }
+
+  .card-depth-img {
+    translate: 0 0;
+  }
+}
+
+
 
